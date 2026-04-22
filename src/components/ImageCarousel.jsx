@@ -37,9 +37,14 @@ function ImageCarousel({
   useEffect(() => {
     if (!autoPlay || isHovered || images.length <= 1) return;
 
-    const timer = setInterval(nextSlide, interval);
+    const timer = setInterval(() => {
+      setCurrent((prev) =>
+        prev === images.length - 1 ? 0 : prev + 1
+      );
+    }, interval);
+
     return () => clearInterval(timer);
-  }, [current, isHovered, autoPlay, interval, images.length]);
+  }, [isHovered, autoPlay, interval, images.length]);
 
   // ---- Swipe ----
   const handleTouchStart = (e) => {
@@ -79,9 +84,8 @@ function ImageCarousel({
           key={index}
           src={img}
           alt={alt}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-            index === current ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${index === current ? "opacity-100" : "opacity-0"
+            }`}
         />
       ))}
 
@@ -111,11 +115,10 @@ function ImageCarousel({
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`h-2 w-2 rounded-full transition ${
-                index === current
+              className={`h-2 w-2 rounded-full transition ${index === current
                   ? "bg-white scale-125"
                   : "bg-gray-400"
-              }`}
+                }`}
             />
           ))}
         </div>

@@ -1,5 +1,4 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import ImageWithFallback from "../components/ImageWithFallback";
 import ImageCarousel from "../components/ImageCarousel";
 import { getCategoryBySlug } from "../data/categories";
 
