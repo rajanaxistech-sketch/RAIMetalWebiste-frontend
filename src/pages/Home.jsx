@@ -238,7 +238,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="border-b border-gold/20 bg-dark-300">
+      {/* <section className="border-b border-gold/20 bg-dark-300">
         <div className="mx-auto grid max-w-6xl grid-cols-2 md:grid-cols-4">
           {stats.map((stat, index) => (
             <div
@@ -250,7 +250,7 @@ function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <section className="page-section">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -366,9 +366,9 @@ function Home() {
       <section className="page-section border-y border-gold/10">
         <div className="mx-auto mb-12 flex max-w-7xl flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="section-tag">Categories</span>
+            <span className="section-tag">Materials</span>
             <h2 className="section-title">
-              Open Each <span className="text-gold">Sub Category</span>
+              Our <span className="text-gold">Products</span>
             </h2>
           </div>
           <p className="max-w-xl text-gray-400">

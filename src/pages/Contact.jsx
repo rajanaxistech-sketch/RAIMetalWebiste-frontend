@@ -34,7 +34,6 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // CAPTCHA validation
     if (formData.captcha.toUpperCase() !== captchaCode) {
       setResponseMsg("Invalid CAPTCHA. Please try again.");
       setCaptchaCode(generateCaptcha());
@@ -77,157 +76,150 @@ function Contact() {
   };
 
   return (
-    <div className="pt-[76px] md:pt-[114px]">
-      <section className="page-section">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          
-          {/* LEFT SIDE */}
-          <div>
-            <span className="section-tag">Contact</span>
-            <h1 className="section-title">
-              Request a <span className="text-gold">Quote</span>
-            </h1>
+    <div className="pt-[140px] bg-[#0b0b0b] text-white min-h-screen">
+      <section className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* HEADER */}
+        <div className="mb-14 border-t border-[#2a2a2a] pt-10">
+          <p className="text-sm tracking-[0.2em] text-gray-400 uppercase">
+            Get in touch
+          </p>
+          <h1 className="text-4xl md:text-6xl font-extrabold mt-2">
+            Request a <span className="text-[#c9a34e]">Quote</span>
+          </h1>
+        </div>
 
-            <div className="mt-8 space-y-6 text-gray-400">
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-full bg-black border border-gold/30 flex items-center justify-center">
-                  📍
-                </div>
-                <div>
-                  <p className="text-white font-semibold">Our Address</p>
-                  <p>5103 Ashcrest Ct, Tampa, Florida 33647</p>
-                </div>
-              </div>
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* LEFT PANEL */}
+          <div className="space-y-8">
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111] hover:border-[#c9a34e]/50 transition">
+              <p className="text-[#c9a34e] text-sm mb-2">📍 ADDRESS</p>
+              <p className="text-gray-300 leading-relaxed">
+                5103 Ashcrest Ct, Tampa, Florida 33647
+              </p>
+            </div>
 
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-full bg-black border border-gold/30 flex items-center justify-center">
-                  📞
-                </div>
-                <div>
-                  <p className="text-white font-semibold">Phone</p>
-                  <p>+1 980-229-1914</p>
-                </div>
-              </div>
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111] hover:border-[#c9a34e]/50 transition">
+              <p className="text-[#c9a34e] text-sm mb-2">📞 PHONE</p>
+              <p className="text-gray-300">+1 980-229-1914</p>
+            </div>
 
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-full bg-black border border-gold/30 flex items-center justify-center">
-                  ✉️
-                </div>
-                <div>
-                  <p className="text-white font-semibold">Email</p>
-                  <p>ammar@raimetals.net</p>
-                </div>
-              </div>
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111] hover:border-[#c9a34e]/50 transition">
+              <p className="text-[#c9a34e] text-sm mb-2">✉️ EMAIL</p>
+              <p className="text-gray-300">ammar@raimetals.net</p>
             </div>
           </div>
 
-          {/* RIGHT FORM */}
+          {/* FORM */}
           <form
             onSubmit={handleSubmit}
-            className="metal-panel grid gap-5 p-8 md:grid-cols-2 md:p-10 rounded-2xl border border-white/10 bg-black/60 backdrop-blur"
+            className="bg-[#111] border border-[#2a2a2a] rounded-xl p-8 grid gap-5"
           >
-            {/* Name */}
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="bg-black border border-white/10 focus:border-gold focus:ring-1 focus:ring-gold text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition"
-            />
-
-            {/* Email */}
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="bg-black border border-white/10 focus:border-gold focus:ring-1 focus:ring-gold text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition"
-            />
-
-            {/* Subject */}
-            <input
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              value={formData.subject}
-              onChange={handleChange}
-              className="bg-black border border-white/10 focus:border-gold focus:ring-1 focus:ring-gold text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition"
-            />
-
-            {/* Phone */}
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="bg-black border border-white/10 focus:border-gold focus:ring-1 focus:ring-gold text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition"
-            />
-
-            {/* Message */}
-            <textarea
-              name="message"
-              placeholder="How can we help you?"
-              value={formData.message}
-              onChange={handleChange}
-              rows={4}
-              required
-              className="col-span-2 bg-black border border-white/10 focus:border-gold focus:ring-1 focus:ring-gold text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition"
-            />
-
-            {/* CAPTCHA */}
-            <div className="col-span-2 flex items-center gap-4">
-              {/* CAPTCHA DISPLAY */}
-              <div className="relative px-6 py-3 rounded-lg bg-black border border-white/10 overflow-hidden">
-                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle,_#ffffff_1px,_transparent_1px)] bg-[size:10px_10px]" />
-                <span className="relative text-gold text-lg tracking-[0.3em] font-bold select-none skew-x-6">
-                  {captchaCode}
-                </span>
-              </div>
-
-              {/* Refresh */}
-              <button
-                type="button"
-                onClick={() => setCaptchaCode(generateCaptcha())}
-                className="px-3 py-3 bg-black border border-white/10 rounded-lg hover:border-gold transition"
-              >
-                🔄
-              </button>
-
-              {/* Input */}
+            <div className="grid md:grid-cols-2 gap-5">
               <input
                 type="text"
-                name="captcha"
-                placeholder="Enter CAPTCHA"
-                value={formData.captcha}
+                name="name"
+                placeholder="Full Name"
+                value={formData.name}
                 onChange={handleChange}
                 required
-                className="flex-1 bg-black border border-white/10 focus:border-gold focus:ring-1 focus:ring-gold text-white placeholder-gray-500 px-4 py-3 rounded-lg outline-none transition"
+                className="input"
+              />
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="input"
+              />
+
+              <input
+                type="text"
+                name="subject"
+                placeholder="Company"
+                value={formData.subject}
+                onChange={handleChange}
+                className="input"
+              />
+
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="input"
               />
             </div>
 
-            {/* Submit */}
+            <textarea
+              name="message"
+              placeholder="Estimated quantity & details..."
+              value={formData.message}
+              onChange={handleChange}
+              rows={5}
+              required
+              className="input"
+            />
+
+            {/* CAPTCHA */}
+            <div className="flex items-center gap-4">
+              <div className="px-6 py-3 rounded-lg bg-black border border-[#2a2a2a] tracking-[0.4em] text-[#c9a34e] font-bold">
+                {captchaCode}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setCaptchaCode(generateCaptcha())}
+                className="px-4 py-3 border border-[#2a2a2a] rounded-lg hover:border-[#c9a34e]"
+              >
+                ↻
+              </button>
+
+              <input
+                type="text"
+                name="captcha"
+                placeholder="Enter code"
+                value={formData.captcha}
+                onChange={handleChange}
+                required
+                className="input flex-1"
+              />
+            </div>
+
             <button
               type="submit"
               disabled={loading}
-              className="col-span-2 mt-2 flex items-center justify-center gap-2 bg-gold text-black py-3 font-semibold rounded-lg hover:opacity-90 transition"
+              className="mt-4 bg-[#c9a34e] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
             >
-              {loading ? "Sending..." : "Send Message"}
+              {loading ? "Sending..." : "Send Inquiry →"}
             </button>
 
-            {/* Response */}
             {responseMsg && (
-              <p className="col-span-2 text-sm text-green-400">
-                {responseMsg}
-              </p>
+              <p className="text-sm text-green-400">{responseMsg}</p>
             )}
           </form>
         </div>
       </section>
+
+      {/* INPUT STYLES */}
+      <style jsx>{`
+        .input {
+          background: #0b0b0b;
+          border: 1px solid #2a2a2a;
+          padding: 12px 14px;
+          border-radius: 8px;
+          color: white;
+          outline: none;
+          transition: all 0.2s;
+        }
+        .input:focus {
+          border-color: #c9a34e;
+          box-shadow: 0 0 0 1px #c9a34e;
+        }
+      `}</style>
     </div>
   );
 }
