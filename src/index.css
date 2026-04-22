@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap");
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark-500 font-inter text-gray-200 antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(201, 168, 76, 0.12), transparent 30%),
+      radial-gradient(circle at bottom right, rgba(232, 199, 106, 0.08), transparent 25%),
+      linear-gradient(180deg, #111111 0%, #0a0a0a 100%);
+  }
+
+  ::selection {
+    @apply bg-gold text-black;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply min-h-screen overflow-x-hidden bg-transparent;
+  }
+
+  .page-section {
+    @apply px-[5%] py-20;
+  }
+
+  .section-tag {
+    @apply mb-3 block font-rajdhani text-[11px] font-bold uppercase tracking-[3px] text-gold;
+  }
+
+  .section-title {
+    @apply mb-5 font-bebas text-4xl leading-none tracking-wider text-silver-light md:text-6xl;
+  }
+
+  .metal-panel {
+    @apply border border-gold/10 bg-white/5 backdrop-blur-sm;
+  }
+
+  .metal-card {
+    @apply border border-gold/10 bg-dark-400/90 p-6 transition-all duration-300 hover:border-gold/40 hover:bg-dark-300/90;
+  }
+
+  .category-card {
+    @apply block transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:bg-dark-300/90;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center bg-gradient-to-br from-gold-dark via-gold to-gold-light px-9 py-3 font-rajdhani text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:-translate-y-0.5 hover:opacity-90;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center border border-silver/30 px-9 py-3 font-rajdhani text-sm font-bold uppercase tracking-[2px] text-silver-light transition-colors hover:border-gold hover:text-gold;
+  }
+
+  .nav-link {
+    @apply font-rajdhani text-sm font-semibold uppercase tracking-[0.3em] text-gray-400 hover:text-gold;
+  }
+
+  .nav-link-active {
+    @apply text-gold;
+  }
+
+  .stat-value {
+    @apply font-bebas text-4xl text-gold-light;
+  }
+
+  .stat-label {
+    @apply font-rajdhani text-[11px] uppercase tracking-widest text-gray-500;
+  }
+}
