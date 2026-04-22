@@ -4,16 +4,16 @@ export const categories = [
     label: "Ferrous Metal",
     description:
       "Heavy-duty ferrous scrap grades prepared for mills, foundries, and industrial recycling programs.",
-    image: "/uploads/HMS/HMS1.jpg",
-    fallbackImage: "/uploads/HMS/HMS1.jpg",
+    image: "/uploads/HMS/HMS1.png",
+    fallbackImage: "/uploads/HMS/HMS1.png",
     subcategories: [
       {
         slug: "hms-12",
         name: "HMS-12",
         description: "About Heavy Metal Scrap",
         images: [
-          "/uploads/HMS/HMS1.jpg",
-          "/uploads/HMS/HMS2.jpg",
+          "/uploads/HMS/HMS1.png",
+          "/uploads/HMS/HMS2.png",
           "/uploads/HMS/HMS3.jpg",
         ],
         fallbackImage: "/uploads/fm1.jpg",

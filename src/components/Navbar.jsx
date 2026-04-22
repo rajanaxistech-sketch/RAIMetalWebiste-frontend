@@ -43,22 +43,22 @@ function Navbar() {
     <>
       {/* TOP STRIP */}
       <div className="fixed top-0 z-[101] hidden h-[38px] w-full items-center justify-end gap-5 border-b border-gold/10 bg-dark-500/95 px-[5%] md:flex">
-        <div className="flex gap-2.5">
+        {/* <div className="flex gap-2.5">
           <span className="flex h-6 w-6 items-center justify-center border border-gold/20 font-rajdhani text-[11px] text-gray-400">Fe</span>
           <span className="flex h-6 w-6 items-center justify-center border border-gold/20 font-rajdhani text-[11px] text-gray-400">Cu</span>
-        </div>
+        </div> */}
 
         <div className="h-4 w-px bg-gold/20" />
 
         <a
-          href="mailto:info@raimetals.net"
+          href="mailto:ammar@raimetals.net"
           className="flex items-center gap-2 font-rajdhani text-[13px] font-bold text-gold"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
           </span>
-          info@raimetals.net
+          ammar@raimetals.net
         </a>
       </div>
 

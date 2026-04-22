@@ -1,5 +1,45 @@
 import { NavLink } from "react-router-dom";
 import { categories } from "../data/categories";
+import { useState, useEffect } from "react";
+
+const heroSlides = [
+  {
+    image: "/uploads/HMS/HMS1.png",
+    tag: "Global Scrap Metal Trading",
+    title: "TURNING METAL",
+    highlight: "INTO VALUE.",
+    description:
+      "A trusted global trader of ferrous and non-ferrous scrap metals.",
+    buttons: [
+      { label: "Explore Materials", link: "#materials", type: "primary" },
+      { label: "Request a Quote", link: "/contact", type: "outline" },
+    ],
+  },
+  {
+    image: "/uploads/HMS/HMS2.png",
+    tag: "About Rai Metals",
+    title: "BUILT ON TRUST",
+    highlight: "DRIVEN BY QUALITY.",
+    description:
+      "Over 25+ years of experience in global scrap metal trading.",
+    buttons: [
+      { label: "About Us", link: "/about", type: "primary" },
+      { label: "Contact Us", link: "/contact", type: "outline" },
+    ],
+  },
+  {
+    image: "/uploads/HMS/HMS3.png",
+    tag: "Global Network",
+    title: "WORLDWIDE",
+    highlight: "METAL SUPPLY.",
+    description:
+      "Connecting suppliers and buyers across 50+ countries.",
+    buttons: [
+      { label: "Our Process", link: "#process", type: "primary" },
+      { label: "Get in Touch", link: "/contact", type: "outline" },
+    ],
+  },
+];
 
 const stats = [
   { value: "25+", label: "Years Experience" },
@@ -63,64 +103,140 @@ const materials = [
 ];
 
 function Home() {
+  const [current, setCurrent] = useState(0);
+
+  // Auto slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % heroSlides.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
+      {/* HERO CAROUSEL */}
       <header className="relative mt-[76px] min-h-[600px] overflow-hidden md:mt-[114px] md:h-[calc(100vh-114px)]">
+
+        {/* Background */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center transition-all duration-700"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1565893708025-7e2a44e16873?w=1600&q=80')",
+            backgroundImage: `url(${heroSlides[current].image})`,
           }}
         />
+
+        {/* Overlay */}
         <div className="absolute inset-0 bg-hero-overlay" />
 
-        <div className="relative z-10 flex h-full max-w-4xl flex-col justify-center px-[8%] py-20">
-          {/* <div className="mb-8 flex items-center gap-4">
-            <img
-              src="/uploads/Logo1.jpeg"
-              alt="Rai Metals logo"
-              className="h-16 w-16 rounded border border-gold/30 object-cover shadow-metal"
-            />
-            <div>
-              <span className="block font-bebas text-3xl tracking-[0.2em] text-silver-light">
-                RAI METALS
-              </span>
-              <span className="block font-rajdhani text-xs font-semibold uppercase tracking-[0.35em] text-gold">
-                Global Recycling
-              </span>
-            </div>
-          </div> */}
+        {/* LEFT BUTTON */}
+        <button
+          onClick={() =>
+            setCurrent((prev) =>
+              prev === 0 ? heroSlides.length - 1 : prev - 1
+            )
+          }
+          className="absolute left-5 top-1/2 z-20 -translate-y-1/2 bg-black/40 px-3 py-2 text-white hover:bg-black"
+        >
+          ‹
+        </button>
 
+        {/* RIGHT BUTTON */}
+        <button
+          onClick={() =>
+            setCurrent((prev) => (prev + 1) % heroSlides.length)
+          }
+          className="absolute right-5 top-1/2 z-20 -translate-y-1/2 bg-black/40 px-3 py-2 text-white hover:bg-black"
+        >
+          ›
+        </button>
+
+        {/* DOTS */}
+        <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrent(index)}
+              className={`h-2 w-6 ${current === index ? "bg-gold" : "bg-white/40"
+                }`}
+            />
+          ))}
+        </div>
+
+        {/* CONTENT */}
+        <div className="relative z-10 flex h-full max-w-4xl flex-col justify-center px-[8%] py-20">
+
+          {/* TAG */}
           <div className="mb-6 inline-block w-fit border border-gold/40 px-3 py-1">
             <span className="font-rajdhani text-[11px] font-bold uppercase tracking-[3px] text-gold">
-              Global Scrap Metal Trading
+              {heroSlides[current].tag}
             </span>
           </div>
 
+          {/* TITLE */}
           <h1 className="mb-4 font-bebas text-6xl leading-none text-silver-light md:text-8xl">
-            TURNING METAL <br />
+            {heroSlides[current].title} <br />
             <span className="bg-gradient-to-r from-gold-light to-gold bg-clip-text text-transparent">
-              INTO VALUE.
+              {heroSlides[current].highlight}
             </span>
           </h1>
 
+          {/* DESCRIPTION */}
           <p className="mb-10 max-w-xl text-lg font-light text-gray-300 md:text-xl">
-            A trusted global trader of ferrous and non-ferrous scrap metals,
-            connecting suppliers and mills with competitive pricing and clear
-            execution.
+            {heroSlides[current].description}
           </p>
 
+          {/* DYNAMIC BUTTONS */}
           <div className="flex flex-wrap gap-4">
-            <a href="#materials" className="btn-primary">
-              Explore Materials
-            </a>
-            <NavLink to="/contact" className="btn-outline">
-              Request a Quote
-            </NavLink>
+            {heroSlides[current].buttons.map((btn, index) =>
+              btn.link.startsWith("/") ? (
+                <NavLink
+                  key={index}
+                  to={btn.link}
+                  className={
+                    btn.type === "primary"
+                      ? "btn-primary"
+                      : "btn-outline"
+                  }
+                >
+                  {btn.label}
+                </NavLink>
+              ) : (
+                <a
+                  key={index}
+                  href={btn.link}
+                  className={
+                    btn.type === "primary"
+                      ? "btn-primary"
+                      : "btn-outline"
+                  }
+                >
+                  {btn.label}
+                </a>
+              )
+            )}
           </div>
         </div>
       </header>
+
+      {/* STATS */}
+      <section className="border-b border-gold/20 bg-dark-300">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 md:grid-cols-4">
+          {stats.map((stat, index) => (
+            <div
+              key={stat.label}
+              className={`py-8 text-center ${index !== stats.length - 1
+                  ? "border-r border-gold/10"
+                  : ""
+                }`}
+            >
+              <div className="stat-value">{stat.value}</div>
+              <div className="stat-label">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="border-b border-gold/20 bg-dark-300">
         <div className="mx-auto grid max-w-6xl grid-cols-2 md:grid-cols-4">
@@ -167,18 +283,37 @@ function Home() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="metal-panel p-4 hover:border-gold/40">
                 <h4 className="mb-1 font-rajdhani font-bold uppercase tracking-wider text-gold">
-                  Global Reach
+                  🌍 Global Reach
                 </h4>
                 <p className="text-xs text-gray-500">
-                  Trading partners across Asia, the Middle East, and Europe.
+                  Trading partners across Asia, Middle East, Europe and Americas.
                 </p>
               </div>
+
               <div className="metal-panel p-4 hover:border-gold/40">
                 <h4 className="mb-1 font-rajdhani font-bold uppercase tracking-wider text-gold">
-                  Fair Pricing
+                  ⚖️ Fair Pricing
                 </h4>
                 <p className="text-xs text-gray-500">
-                  Market-linked rates with transparent documentation.
+                  Competitive market-linked rates with full transparency.
+                </p>
+              </div>
+
+              <div className="metal-panel p-4 hover:border-gold/40">
+                <h4 className="mb-1 font-rajdhani font-bold uppercase tracking-wider text-gold">
+                  🔬 Grade Expertise
+                </h4>
+                <p className="text-xs text-gray-500">
+                  Accurate material identification, sorting, and grading at every step.
+                </p>
+              </div>
+
+              <div className="metal-panel p-4 hover:border-gold/40">
+                <h4 className="mb-1 font-rajdhani font-bold uppercase tracking-wider text-gold">
+                  🚢 Logistics Support
+                </h4>
+                <p className="text-xs text-gray-500">
+                  End-to-end freight management including export documentation.
                 </p>
               </div>
             </div>
@@ -275,7 +410,7 @@ function Home() {
                   }
                   className="btn-outline"
                 >
-                  Open Category
+                  View Details
                 </NavLink>
               </div>
             </article>
@@ -340,7 +475,7 @@ function Home() {
         </div>
       </section>
 
-     <section id="process" className="page-section bg-black border-t border-gold/10">
+      <section id="process" className="page-section bg-black border-t border-gold/10">
         <div className="mx-auto max-w-7xl">
           <h2 className="text-5xl md:text-6xl font-bebas text-white mb-6">
             OUR <span className="text-gold">PROCESS</span>

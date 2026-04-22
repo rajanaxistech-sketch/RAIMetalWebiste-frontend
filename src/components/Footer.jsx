@@ -39,9 +39,9 @@ function Footer() {
             Materials
           </h4>
           <div className="space-y-3 text-sm text-gray-400">
-            <p>Copper</p>
-            <p>Aluminum</p>
-            <p>Ferrous Scrap</p>
+            <p>Ferrous Metal</p>
+            <p>Non Ferrous Metal</p>
+            <p>Secondary Metal</p>
           </div>
         </div>
 
@@ -50,8 +50,8 @@ function Footer() {
             Support
           </h4>
           <div className="space-y-3 text-sm text-gray-400">
-            <p>info@raimetals.net</p>
-            <p>+91 XXXXX XXXXX</p>
+            <p>ammar@raimetals.net</p>
+            <p>+1 980 229 1914</p>
             <NavLink to="/contact" className="text-gold underline">
               Contact Us
             </NavLink>

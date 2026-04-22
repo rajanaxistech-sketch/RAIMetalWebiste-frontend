@@ -87,7 +87,7 @@ function CategoryPage() {
                     to={`/categories/${category.slug}/${item.slug}`}
                     className="btn-outline"
                   >
-                    Open Details
+                    View Details
                   </Link>
                 </div>
               </article>
