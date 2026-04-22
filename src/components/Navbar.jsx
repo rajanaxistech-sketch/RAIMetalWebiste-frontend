@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { categories } from "../data/categories";
 
 const pageLinks = [
@@ -8,34 +8,44 @@ const pageLinks = [
   { to: "/#industries", label: "Industries" },
 ];
 
-const handleNavClick = (e, target) => {
-  if (window.location.pathname !== "/") {
-    window.location.href = target; // go to home with hash
-  } else {
-    e.preventDefault();
-    const id = target.replace("/#", "");
-    const el = document.getElementById(id);
-
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  }
-};
-
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Handle smooth scroll after route change
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
+
+  const handleNavClick = (e, target) => {
+    e.preventDefault();
+
+    if (target.includes("#")) {
+      navigate(target);
+    } else {
+      navigate(target);
+    }
+
+    setIsOpen(false);
+  };
 
   return (
     <>
       {/* TOP STRIP */}
       <div className="fixed top-0 z-[101] hidden h-[38px] w-full items-center justify-end gap-5 border-b border-gold/10 bg-dark-500/95 px-[5%] md:flex">
         <div className="flex gap-2.5">
-          <span className="flex h-6 w-6 items-center justify-center border border-gold/20 font-rajdhani text-[11px] text-gray-400">
-            Fe
-          </span>
-          <span className="flex h-6 w-6 items-center justify-center border border-gold/20 font-rajdhani text-[11px] text-gray-400">
-            Cu
-          </span>
+          <span className="flex h-6 w-6 items-center justify-center border border-gold/20 font-rajdhani text-[11px] text-gray-400">Fe</span>
+          <span className="flex h-6 w-6 items-center justify-center border border-gold/20 font-rajdhani text-[11px] text-gray-400">Cu</span>
         </div>
 
         <div className="h-4 w-px bg-gold/20" />
@@ -66,47 +76,34 @@ function Navbar() {
 
         {/* DESKTOP MENU */}
         <div className="hidden items-center gap-9 lg:flex">
-
-          {/* PAGE LINKS */}
           {pageLinks.map((link) => (
-            <a
+            <NavLink
               key={link.to}
-              href={link.to}
+              to={link.to}
               onClick={(e) => handleNavClick(e, link.to)}
               className="nav-link"
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
 
           {/* MATERIALS DROPDOWN */}
           <div className="group relative">
             <div className="nav-link flex items-center gap-2 cursor-pointer">
               Materials
-              <span className="text-[10px] text-gold transition-transform duration-200 group-hover:rotate-180">
-                ▼
-              </span>
+              <span className="text-[10px] text-gold transition-transform duration-200 group-hover:rotate-180">▼</span>
             </div>
 
-            {/* MEGA MENU */}
             <div className="pointer-events-none absolute left-1/2 top-full z-[120] w-[900px] -translate-x-1/2 pt-6 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
               <div className="border border-gold/20 bg-dark-400/95 p-6 shadow-metal backdrop-blur-xl">
-
-                {/* HEADER */}
                 <div className="mb-5 border-b border-gold/10 pb-4">
                   <span className="section-tag mb-2">Materials</span>
-                  <h3 className="font-bebas text-3xl tracking-[0.12em] text-silver-light">
-                    Our Materials
-                  </h3>
+                  <h3 className="font-bebas text-3xl tracking-[0.12em] text-silver-light">Our Materials</h3>
                 </div>
 
-                {/* GRID */}
                 <div className="grid grid-cols-3 gap-6">
-
-                  {/* Ferrous & Non-Ferrous from categories */}
                   {categories.map((category) => (
                     <div key={category.slug}>
-
                       <Link
                         to={`/categories/${category.slug}`}
                         className="mb-3 block font-rajdhani text-lg font-bold uppercase tracking-[0.16em] text-gold hover:text-white"
@@ -151,14 +148,10 @@ function Navbar() {
 
         {/* RIGHT SIDE */}
         <div className="flex items-center gap-4">
-          <NavLink
-            to="/contact"
-            className="btn-primary hidden px-6 py-2 sm:inline-flex"
-          >
+          <NavLink to="/contact" className="btn-primary hidden px-6 py-2 sm:inline-flex">
             Contact Us
           </NavLink>
 
-          {/* HAMBURGER */}
           <button
             className="flex flex-col gap-1 lg:hidden"
             onClick={() => setIsOpen(!isOpen)}
@@ -172,26 +165,22 @@ function Navbar() {
 
       {/* MOBILE MENU */}
       <div
-        className={`fixed top-[76px] left-0 w-full bg-dark-500/95 backdrop-blur-md z-[99] transition-all duration-300 ${isOpen
-          ? "max-h-screen opacity-100"
-          : "max-h-0 opacity-0 overflow-hidden"
-          } lg:hidden`}
+        className={`fixed top-[76px] left-0 w-full bg-dark-500/95 backdrop-blur-md z-[99] transition-all duration-300 ${
+          isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        } lg:hidden`}
       >
         <div className="flex flex-col gap-6 p-6">
 
           {/* PAGE LINKS */}
           {pageLinks.map((link) => (
-            <a
+            <NavLink
               key={link.to}
-              href={link.to}
-              onClick={(e) => {
-                handleNavClick(e, link.to);
-                setIsOpen(false);
-              }}
+              to={link.to}
+              onClick={(e) => handleNavClick(e, link.to)}
               className="text-lg text-gold"
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
 
           {/* MATERIALS MOBILE */}
