@@ -50,7 +50,7 @@ function Footer() {
             Support
           </h4>
           <div className="space-y-3 text-sm text-gray-400">
-            <p>ammar@raimetals.net</p>
+            <p>amar@raimetals.net</p>
             <p>+1 980 229 1914</p>
             <NavLink to="/contact" className="text-gold underline">
               Contact Us

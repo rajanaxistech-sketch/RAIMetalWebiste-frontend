@@ -51,14 +51,14 @@ function Navbar() {
         <div className="h-4 w-px bg-gold/20" />
 
         <a
-          href="mailto:ammar@raimetals.net"
+          href="mailto:amar@raimetals.net"
           className="flex items-center gap-2 font-rajdhani text-[13px] font-bold text-gold"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
           </span>
-          ammar@raimetals.net
+          amar@raimetals.net
         </a>
       </div>
 

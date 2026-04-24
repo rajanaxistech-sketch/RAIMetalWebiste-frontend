@@ -87,28 +87,28 @@ function About() {
             {/* ITEM */}
             {[
               {
-                year: "1999",
+                year: "2011",
                 title: "Founded",
                 text: "Rai Metals was established with a clear mission — to bring integrity, precision, and global connectivity to the scrap metal trading industry."
               },
               {
-                year: "2004",
+                year: "2013",
                 title: "First International Exports",
                 text: "Secured our first export contracts in South-East Asia, establishing strong overseas trade relationships."
               },
               {
-                year: "2010",
+                year: "2016",
                 title: "Expanded to Specialty Metals",
                 text: "Diversified into high-temperature alloys including Inconel, Hastelloy, and Tungsten Carbide."
               },
               {
-                year: "2016",
+                year: "2021",
                 title: "Middle East & European Network",
                 text: "Expanded trade corridors into the Middle East and Europe, building strong partnerships."
               },
               {
-                year: "2024",
-                title: "25 Years & Growing",
+                year: "2026",
+                title: "15 Years & Growing",
                 text: "Celebrating over two decades of trusted global trading across 50+ countries."
               }
             ].map((item, index) => (

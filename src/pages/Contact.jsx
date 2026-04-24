@@ -18,7 +18,7 @@ function Contact() {
     subject: "",
     phone: "",
     message: "",
-    captcha: "",
+    captcha: "", 
   });
 
   const [loading, setLoading] = useState(false);
@@ -44,18 +44,27 @@ function Contact() {
     setResponseMsg("");
 
     try {
-      const res = await fetch("https://your-api-endpoint.com/contact", {
+      const payload = {
+        ...formData,
+        captchaCode: formData.captcha, 
+        captcha: captchaCode,
+      };
+
+      console.log("Submitting:", payload);
+
+      const res = await fetch("https://raimetalsapi.anaxistech.com/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
 
       if (res.ok) {
         setResponseMsg("Message sent successfully!");
+
         setFormData({
           name: "",
           email: "",
@@ -91,21 +100,21 @@ function Contact() {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* LEFT PANEL */}
           <div className="space-y-8">
-            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111] hover:border-[#c9a34e]/50 transition">
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
               <p className="text-[#c9a34e] text-sm mb-2">📍 ADDRESS</p>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-gray-300">
                 5103 Ashcrest Ct, Tampa, Florida 33647
               </p>
             </div>
 
-            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111] hover:border-[#c9a34e]/50 transition">
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
               <p className="text-[#c9a34e] text-sm mb-2">📞 PHONE</p>
               <p className="text-gray-300">+1 980-229-1914</p>
             </div>
 
-            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111] hover:border-[#c9a34e]/50 transition">
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
               <p className="text-[#c9a34e] text-sm mb-2">✉️ EMAIL</p>
-              <p className="text-gray-300">ammar@raimetals.net</p>
+              <p className="text-gray-300">amar@raimetals.net</p>
             </div>
           </div>
 
@@ -173,7 +182,7 @@ function Contact() {
               <button
                 type="button"
                 onClick={() => setCaptchaCode(generateCaptcha())}
-                className="px-4 py-3 border border-[#2a2a2a] rounded-lg hover:border-[#c9a34e]"
+                className="px-4 py-3 border border-[#2a2a2a] rounded-lg"
               >
                 ↻
               </button>
@@ -192,7 +201,7 @@ function Contact() {
             <button
               type="submit"
               disabled={loading}
-              className="mt-4 bg-[#c9a34e] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+              className="mt-4 bg-[#c9a34e] text-black py-3 rounded-lg font-semibold"
             >
               {loading ? "Sending..." : "Send Inquiry →"}
             </button>
@@ -213,7 +222,6 @@ function Contact() {
           border-radius: 8px;
           color: white;
           outline: none;
-          transition: all 0.2s;
         }
         .input:focus {
           border-color: #c9a34e;
