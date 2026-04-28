@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Seo from "../components/Seo";
 
 function SecondaryMetalPage() {
   const images = [
@@ -20,6 +21,13 @@ function SecondaryMetalPage() {
 
   return (
     <div className="pt-[76px] md:pt-[114px]">
+      <Seo
+        title="Secondary Metal Products | Rai Metals"
+        description="Explore high-quality secondary metal products processed from recycled scrap for reliable industrial applications."
+        keywords="secondary metal products, recycled metals, industrial metals, Rai Metals"
+        canonicalPath="/secondary-metal"
+        image="/uploads/SecondaryMaterial/secondarymaterial1.jpg"
+      />
 
       {/* -------- HERO SECTION (CATEGORY STYLE) -------- */}
       <section className="page-section border-b border-gold/10">

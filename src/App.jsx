@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
 import SecondaryMetalPage from "./pages/SecondaryMetalPage"
+import Private from "./pages/Private";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/categories/:categorySlug" element={<CategoryPage />} />
             <Route path="/secondary-metal" element={<SecondaryMetalPage />} />
+            <Route path="/private" element={<Private />} />
             <Route
               path="/categories/:categorySlug/:subcategorySlug"
               element={<SubcategoryPage />}

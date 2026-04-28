@@ -43,13 +43,10 @@ function Navbar() {
     <>
       {/* TOP STRIP */}
       <div className="fixed top-0 z-[101] hidden h-[38px] w-full items-center justify-end gap-5 border-b border-gold/10 bg-dark-500/95 px-[5%] md:flex">
-        {/* <div className="flex gap-2.5">
-          <span className="flex h-6 w-6 items-center justify-center border border-gold/20 font-rajdhani text-[11px] text-gray-400">Fe</span>
-          <span className="flex h-6 w-6 items-center justify-center border border-gold/20 font-rajdhani text-[11px] text-gray-400">Cu</span>
-        </div> */}
 
         <div className="h-4 w-px bg-gold/20" />
 
+        {/* EMAIL */}
         <a
           href="mailto:amar@raimetals.net"
           className="flex items-center gap-2 font-rajdhani text-[13px] font-bold text-gold"
@@ -60,6 +57,18 @@ function Navbar() {
           </span>
           amar@raimetals.net
         </a>
+
+        {/* WHATSAPP */}
+        <a
+          href="https://wa.me/19802291914"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 font-rajdhani text-[13px] font-bold text-gold hover:text-white"
+        >
+          <i className="fab fa-whatsapp text-gold text-lg"></i>
+          +1 980 229 1914
+        </a>
+
       </div>
 
       {/* MAIN NAV */}
@@ -165,9 +174,8 @@ function Navbar() {
 
       {/* MOBILE MENU */}
       <div
-        className={`fixed top-[76px] left-0 w-full bg-dark-500/95 backdrop-blur-md z-[99] transition-all duration-300 ${
-          isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-        } lg:hidden`}
+        className={`fixed top-[76px] left-0 w-full bg-dark-500/95 backdrop-blur-md z-[99] transition-all duration-300 ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+          } lg:hidden`}
       >
         <div className="flex flex-col gap-6 p-6">
 

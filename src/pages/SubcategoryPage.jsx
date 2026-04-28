@@ -1,6 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import { getSubcategoryBySlug } from "../data/categories";
 import ImageCarousel from "../components/ImageCarousel";
+import Seo from "../components/Seo";
 
 function SubcategoryPage() {
   const { categorySlug, subcategorySlug } = useParams();
@@ -14,6 +15,13 @@ function SubcategoryPage() {
 
   return (
     <div className="pt-[76px] md:pt-[114px]">
+      <Seo
+        title={`${subcategory.name} | ${category.label} | Rai Metals`}
+        description={subcategory.description}
+        keywords={`${subcategory.name}, ${category.label}, Rai Metals, scrap metal trading`}
+        canonicalPath={`/categories/${category.slug}/${subcategory.slug}`}
+        image={subcategory.fallbackImage?.startsWith("/") ? subcategory.fallbackImage : `/${subcategory.fallbackImage}`}
+      />
 
       {/* -------- HERO SECTION -------- */}
       <section className="page-section border-b border-gold/10">
@@ -69,10 +77,10 @@ function SubcategoryPage() {
       </section>
 
       {/* -------- INFO SECTION -------- */}
-      <section className="page-section bg-dark-300">
+      {/* <section className="page-section bg-dark-300">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.8fr_1.2fr]">
 
-          {/* IMAGE INFO */}
+          IMAGE INFO
           <div className="metal-panel p-8">
             <span className="section-tag">Image Source</span>
 
@@ -90,7 +98,7 @@ function SubcategoryPage() {
             </p>
           </div>
 
-          {/* NOTES */}
+          NOTES
           <div className="metal-panel p-8">
             <span className="section-tag">Commercial Notes</span>
 
@@ -105,7 +113,7 @@ function SubcategoryPage() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
     </div>
   );

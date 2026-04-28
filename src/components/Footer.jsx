@@ -39,9 +39,15 @@ function Footer() {
             Materials
           </h4>
           <div className="space-y-3 text-sm text-gray-400">
-            <p>Ferrous Metal</p>
-            <p>Non Ferrous Metal</p>
-            <p>Secondary Metal</p>
+            <NavLink to="/categories/ferrous-metal" className="block hover:text-gold">
+              Ferrous Metal
+            </NavLink>
+            <NavLink to="/categories/non-ferrous-metal" className="block hover:text-gold">
+              Non Ferrous Metal
+            </NavLink>
+            <NavLink to="/secondary-metal" className="block hover:text-gold">
+              Secondary Metal
+            </NavLink>
           </div>
         </div>
 
@@ -62,7 +68,7 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-gold/10 pt-8 text-[11px] text-gray-500 md:flex-row">
         <p>© 2026 Rai Metals. All rights reserved.</p>
         <p>
-          Designed with <span className="text-gold">industrial precision</span>
+          Powered By <span className="text-gold">AnaxisTech</span>
         </p>
       </div>
     </footer>

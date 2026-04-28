@@ -14,7 +14,7 @@ export const categories = [
         images: [
           "/uploads/HMS/HMS1.png",
           "/uploads/HMS/HMS2.png",
-          "/uploads/HMS/HMS3.jpg",
+          "/uploads/HMS/HMS3.png",
         ],
         fallbackImage: "/uploads/fm1.jpg",
         details: [
@@ -59,7 +59,7 @@ export const categories = [
     slug: "non-ferrous-metal",
     label: "Non Ferrous Metal",
     description:
-      "Sorted non-ferrous grades covering reusable sections, scrap lots, and mill-ready commercial material.",
+      "Sorted non-ferrous grades covering reusable sections, scrap lots, and mill-ready material.",
     image: "/uploads/pipes/pipes1.jpg",
     fallbackImage:
       "/uploads/pipes/pipes1.jpg",

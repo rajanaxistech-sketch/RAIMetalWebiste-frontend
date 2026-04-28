@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Seo from "../components/Seo";
 
 function Contact() {
   const generateCaptcha = () => {
@@ -86,6 +87,15 @@ function Contact() {
 
   return (
     <div className="pt-[140px] bg-[#0b0b0b] text-white min-h-screen">
+      <Seo
+        title="Contact Rai Metals | Request Scrap Metal Quote"
+        description="Contact Rai Metals for scrap metal sourcing, pricing, and global trading inquiries. Request a quote for ferrous and non-ferrous materials."
+        keywords="contact Rai Metals, scrap metal quote, metal supplier inquiry, ferrous scrap pricing, non-ferrous scrap"
+        robots="index, follow"
+        canonicalPath="/contact"
+        image="/uploads/Logo1.jpeg"
+      />
+
       <section className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* HEADER */}
         <div className="mb-14 border-t border-[#2a2a2a] pt-10">

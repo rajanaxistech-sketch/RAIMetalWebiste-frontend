@@ -1,6 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import ImageCarousel from "../components/ImageCarousel";
 import { getCategoryBySlug } from "../data/categories";
+import Seo from "../components/Seo";
 
 function CategoryPage() {
   const { categorySlug } = useParams();
@@ -12,6 +13,13 @@ function CategoryPage() {
 
   return (
     <div className="pt-[76px] md:pt-[114px]">
+      <Seo
+        title={`${category.label} | Rai Metals`}
+        description={category.description}
+        keywords={`${category.label}, Rai Metals, scrap metal, metal trading`}
+        canonicalPath={`/categories/${category.slug}`}
+        image={category.fallbackImage?.startsWith("/") ? category.fallbackImage : `/${category.fallbackImage}`}
+      />
       
       {/* -------- CATEGORY HERO -------- */}
       <section className="page-section border-b border-gold/10">

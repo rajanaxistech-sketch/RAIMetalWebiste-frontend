@@ -1,6 +1,16 @@
+import Seo from "../components/Seo";
+
 function About() {
   return (
     <div className="pt-[76px] md:pt-[114px]">
+      <Seo
+        title="About Rai Metals | Ferrous & Non-Ferrous Metal Experts"
+        description="Learn about Rai Metals, our journey, global network, and expertise in supplying quality ferrous and non-ferrous metal scrap and ingots."
+        keywords="about Rai Metals, metal scrap supplier, ferrous metals, non-ferrous metals, global metal trading"
+        robots="index, follow"
+        canonicalPath="/about"
+        image="/uploads/whoimage.png"
+      />
 
       {/* HERO SECTION */}
       <section className="page-section">
@@ -34,7 +44,7 @@ function About() {
       {/* WHAT WE OFFER */}
       <section className="page-section bg-dark-300">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-3">
-          
+
           <div className="metal-card lg:col-span-2">
             <h2 className="mb-4 font-bebas text-4xl tracking-wide text-silver-light">
               What We Offer
@@ -109,7 +119,7 @@ function About() {
               {
                 year: "2026",
                 title: "15 Years & Growing",
-                text: "Celebrating over two decades of trusted global trading across 50+ countries."
+                text: "Celebrating over two decades of trusted global trading across 20+ countries."
               }
             ].map((item, index) => (
               <div key={index} className="relative">
@@ -143,6 +153,89 @@ function About() {
         </div>
       </section>
 
+      {/* GLOBAL PRESENCE */}
+      {/* GLOBAL PRESENCE */}
+      <section className="page-section bg-dark-300">
+        <div className="mx-auto max-w-7xl">
+
+          {/* Heading */}
+          <div className="mb-8">
+            <span className="inline-block bg-gold px-4 py-2 text-black font-semibold tracking-wide uppercase">
+              Global Presence
+            </span>
+            <div className="mt-4 h-[1px] w-full bg-gradient-to-r from-gold/40 to-transparent"></div>
+          </div>
+
+          {/* Content */}
+          <div className="grid gap-8 lg:grid-cols-2">
+
+            {/* Left - Description */}
+            <div>
+              <p className="text-gray-300 leading-relaxed">
+                We are supplying high-quality metal scrap and materials across multiple
+                international markets with a strong and reliable global network.
+              </p>
+
+              <p className="mt-4 text-gray-400 leading-relaxed">
+                Our presence spans across key regions including Asia, North America,
+                and the Middle East, ensuring consistent supply and trusted partnerships.
+              </p>
+            </div>
+
+            {/* Right - Countries */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {[
+                "India",
+                "China",
+                "Bangladesh",
+                "Sri Lanka",
+                "USA",
+                "Singapore",
+                "Malaysia",
+                "Middle East",
+              ].map((country, i) => (
+                <div
+                  key={i}
+                  className="border border-gold/20 px-4 py-3 text-sm text-gray-300 hover:border-gold/50 hover:text-white transition"
+                >
+                  {country}
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* India Cities */}
+          <div className="mt-10">
+            <h3 className="text-gold font-semibold mb-4 tracking-wide uppercase">
+              Major Cities in India
+            </h3>
+
+            <div className="flex flex-wrap gap-3">
+              {[
+                "Gandhidham",
+                "Ahmedabad",
+                "Rajkot",
+                "Mumbai",
+                "Pune",
+                "Nagpur",
+                "Chennai",
+                "Delhi",
+                "Ludhiana",
+                "Rajasthan",
+              ].map((city, i) => (
+                <span
+                  key={i}
+                  className="border border-gray-700 px-3 py-1 text-xs text-gray-400 hover:border-gold hover:text-white transition"
+                >
+                  {city}
+                </span>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
     </div>
   );
 }

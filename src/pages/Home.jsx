@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { categories } from "../data/categories";
 import { useState, useEffect } from "react";
+import Seo from "../components/Seo";
 
 const heroSlides = [
   {
@@ -21,7 +22,7 @@ const heroSlides = [
     title: "BUILT ON TRUST",
     highlight: "DRIVEN BY QUALITY.",
     description:
-      "Over 25+ years of experience in global scrap metal trading.",
+      "Over 15+ years of experience in global scrap metal trading.",
     buttons: [
       { label: "About Us", link: "/about", type: "primary" },
       { label: "Contact Us", link: "/contact", type: "outline" },
@@ -33,7 +34,7 @@ const heroSlides = [
     title: "WORLDWIDE",
     highlight: "METAL SUPPLY.",
     description:
-      "Connecting suppliers and buyers across 50+ countries.",
+      "Connecting suppliers and buyers across 20+ countries.",
     buttons: [
       { label: "Our Process", link: "#process", type: "primary" },
       { label: "Get in Touch", link: "/contact", type: "outline" },
@@ -42,8 +43,8 @@ const heroSlides = [
 ];
 
 const stats = [
-  { value: "25+", label: "Years Experience" },
-  { value: "50+", label: "Countries" },
+  { value: "15+", label: "Years Experience" },
+  { value: "20+", label: "Countries" },
   { value: "10K+", label: "Tons Monthly" },
   { value: "100%", label: "Transparent" },
 ];
@@ -116,6 +117,15 @@ function Home() {
 
   return (
     <div>
+      <Seo
+        title="Rai Metals | Global Scrap Metal Trading Company"
+        description="Rai Metals is a trusted global trader of ferrous and non-ferrous scrap metals, delivering quality materials and reliable supply worldwide."
+        keywords="Rai Metals, scrap metal trading, ferrous scrap, non-ferrous scrap, metal recycling, global metal supplier"
+        robots="index, follow"
+        canonicalPath="/"
+        image="/uploads/HMS/HMS1.png"
+      />
+
       {/* HERO CAROUSEL */}
       <header className="relative mt-[76px] min-h-[600px] overflow-hidden md:mt-[114px] md:h-[calc(100vh-114px)]">
 
@@ -227,8 +237,8 @@ function Home() {
             <div
               key={stat.label}
               className={`py-8 text-center ${index !== stats.length - 1
-                  ? "border-r border-gold/10"
-                  : ""
+                ? "border-r border-gold/10"
+                : ""
                 }`}
             >
               <div className="stat-value">{stat.value}</div>
@@ -262,7 +272,7 @@ function Home() {
             />
             <div className="absolute -bottom-5 -right-5 -z-10 h-32 w-32 border-2 border-gold" />
             <div className="absolute bottom-6 left-6 border border-gold/20 border-l-4 border-l-gold bg-dark-500/90 p-4">
-              <span className="block font-bebas text-3xl text-gold">SINCE 1999</span>
+              <span className="block font-bebas text-3xl text-gold">SINCE 2011</span>
               <span className="font-rajdhani text-[11px] uppercase tracking-widest text-gray-400">
                 Industry Excellence
               </span>
@@ -283,37 +293,37 @@ function Home() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="metal-panel p-4 hover:border-gold/40">
                 <h4 className="mb-1 font-rajdhani font-bold uppercase tracking-wider text-gold">
-                  🌍 Global Reach
+                  🌐 Global Network
                 </h4>
                 <p className="text-xs text-gray-500">
-                  Trading partners across Asia, Middle East, Europe and Americas.
+                  Sourcing from 20+ countries
                 </p>
               </div>
 
               <div className="metal-panel p-4 hover:border-gold/40">
                 <h4 className="mb-1 font-rajdhani font-bold uppercase tracking-wider text-gold">
-                  ⚖️ Fair Pricing
+                  ♻️ Sustainable Practices
                 </h4>
                 <p className="text-xs text-gray-500">
-                  Competitive market-linked rates with full transparency.
+                  Eco-friendly recycling
                 </p>
               </div>
 
               <div className="metal-panel p-4 hover:border-gold/40">
                 <h4 className="mb-1 font-rajdhani font-bold uppercase tracking-wider text-gold">
-                  🔬 Grade Expertise
+                  🤝 Customer Focus
                 </h4>
                 <p className="text-xs text-gray-500">
-                  Accurate material identification, sorting, and grading at every step.
+                  Tailored solutions for clients
                 </p>
               </div>
 
               <div className="metal-panel p-4 hover:border-gold/40">
                 <h4 className="mb-1 font-rajdhani font-bold uppercase tracking-wider text-gold">
-                  🚢 Logistics Support
+                  🚢 Customer Focus
                 </h4>
                 <p className="text-xs text-gray-500">
-                  End-to-end freight management including export documentation.
+                  Tailored solutions for clients
                 </p>
               </div>
             </div>
@@ -486,7 +496,8 @@ function Home() {
             settlement — designed to maximize value at every step.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-10 text-center">
+          {/* GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-10 text-center group">
             {[
               {
                 step: "01",
@@ -514,18 +525,30 @@ function Home() {
                 desc: "Secure payment processed promptly with full documentation.",
               },
             ].map((item) => (
-              <div key={item.step} className="relative">
-                <div className="mx-auto mb-6 w-16 h-20 bg-dark-400 flex items-center justify-center skew-y-3">
-                  <span className="text-gold font-bebas text-2xl -skew-y-3">
-                    {item.step}
-                  </span>
+              <div
+                key={item.step}
+                className="group relative transition-all duration-300 hover:scale-105 group-hover:opacity-40 hover:!opacity-100"
+              >
+                {/* CARD */}
+                <div className="relative rounded-lg border border-transparent p-4 transition-all duration-300 group-hover:border-gold group-hover:bg-dark-400/60">
+
+                  {/* STEP BOX */}
+                  <div className="mx-auto mb-6 w-16 h-20 bg-dark-400 flex items-center justify-center skew-y-3 transition-all duration-300 group-hover:bg-gold">
+                    <span className="text-gold font-bebas text-2xl -skew-y-3 group-hover:text-black">
+                      {item.step}
+                    </span>
+                  </div>
+
+                  {/* TITLE */}
+                  <h3 className="text-white font-rajdhani tracking-widest text-sm mb-3 transition-all duration-300 group-hover:text-gold">
+                    {item.title}
+                  </h3>
+
+                  {/* DESCRIPTION */}
+                  <p className="text-gray-500 text-sm transition-all duration-300 group-hover:text-gray-300">
+                    {item.desc}
+                  </p>
                 </div>
-
-                <h3 className="text-white font-rajdhani tracking-widest text-sm mb-3">
-                  {item.title}
-                </h3>
-
-                <p className="text-gray-500 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
