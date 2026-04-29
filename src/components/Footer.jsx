@@ -68,7 +68,15 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-gold/10 pt-8 text-[11px] text-gray-500 md:flex-row">
         <p>© 2026 Rai Metals. All rights reserved.</p>
         <p>
-          Powered By <span className="text-gold">AnaxisTech</span>
+          Powered By{" "}
+          <a
+            href="https://anaxistech.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold hover:underline"
+          >
+            AnaxisTech
+          </a>
         </p>
       </div>
     </footer>
