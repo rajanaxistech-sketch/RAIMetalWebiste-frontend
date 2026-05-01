@@ -132,10 +132,21 @@
 .phone-container .country-list::-webkit-scrollbar {
   width: 6px;
 }
+
 .phone-container .country-list::-webkit-scrollbar-thumb {
   background: #c9a34e;
   border-radius: 10px;
 }
-.react-tel-input .flag-dropdown.open .selected-flag{
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+  background: transparent !important;
+}
+
+.react-tel-input .flag-dropdown.open {
+  background: transparent !important;
+}
+
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus {
   background: transparent !important;
 }
