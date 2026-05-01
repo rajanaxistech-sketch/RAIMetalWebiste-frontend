@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Seo from "../components/Seo";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
@@ -20,35 +21,53 @@ function Contact() {
     subject: "",
     phone: "",
     message: "",
-    captcha: "",
+    captcha: "", 
   });
 
   const [loading, setLoading] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.captcha.toUpperCase() !== captchaCode) {
-      setResponseMsg("Invalid CAPTCHA");
+      setResponseMsg("Invalid CAPTCHA. Please try again.");
       setCaptchaCode(generateCaptcha());
       return;
     }
 
     setLoading(true);
+    setResponseMsg("");
 
     try {
-      const res = await fetch(
-        "https://raimetalsapi.anaxistech.com/api/contact",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      const payload = {
+        ...formData,
+        captchaCode: formData.captcha, 
+        captcha: captchaCode,
+      };
+
+      console.log("Submitting:", payload);
+
+      const res = await fetch("https://raimetalsapi.anaxistech.com/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
 
       if (res.ok) {
         setResponseMsg("Message sent successfully!");
+
         setFormData({
           name: "",
           email: "",
@@ -59,92 +78,94 @@ function Contact() {
         });
         setCaptchaCode(generateCaptcha());
       } else {
-        setResponseMsg("Something went wrong.");
+        setResponseMsg(data.message || "Something went wrong.");
       }
-    } catch {
-      setResponseMsg("Server error");
+    } catch (error) {
+      setResponseMsg("Server error. Please try again.");
     }
 
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-white px-4 py-10 pt-48">
-      <div className="max-w-7xl mx-auto">
+    <div className="pt-[140px] bg-[#0b0b0b] text-white min-h-screen">
+      <Seo
+        title="Contact Rai Metals | Request Scrap Metal Quote"
+        description="Contact Rai Metals for scrap metal sourcing, pricing, and global trading inquiries. Request a quote for ferrous and non-ferrous materials."
+        keywords="contact Rai Metals, scrap metal quote, metal supplier inquiry, ferrous scrap pricing, non-ferrous scrap"
+        robots="index, follow"
+        canonicalPath="/contact"
+        image="/uploads/Logo1.jpeg"
+      />
 
+      <section className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* HEADER */}
-        <div className="mb-10">
-          <p className="text-sm text-gray-400 tracking-widest">
-            GET IN TOUCH
+        <div className="mb-14 border-t border-[#2a2a2a] pt-10">
+          <p className="text-sm tracking-[0.2em] text-gray-400 uppercase">
+            Get in touch
           </p>
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-4xl md:text-6xl font-extrabold mt-2">
             Request a <span className="text-[#c9a34e]">Quote</span>
           </h1>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-
-          {/* LEFT SIDE INFO */}
-          <div className="space-y-6">
-
-            <div className="info-card">
-              <p className="label">📍 ADDRESS</p>
-              <p>5103 Ashcrest Ct, Tampa, Florida 33647</p>
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* LEFT PANEL */}
+          <div className="space-y-8">
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
+              <p className="text-[#c9a34e] text-sm mb-2">📍 ADDRESS</p>
+              <p className="text-gray-300">
+                5103 Ashcrest Ct, Tampa, Florida 33647
+              </p>
             </div>
 
-            <div className="info-card">
-              <p className="label">📞 PHONE</p>
-              <p>+1 980-229-1914</p>
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
+              <p className="text-[#c9a34e] text-sm mb-2">📞 PHONE</p>
+              <p className="text-gray-300">+1 980-229-1914</p>
             </div>
 
-            <div className="info-card">
-              <p className="label">✉️ EMAIL</p>
-              <p>amar@raimetals.net</p>
+            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
+              <p className="text-[#c9a34e] text-sm mb-2">✉️ EMAIL</p>
+              <p className="text-gray-300">amar@raimetals.net</p>
             </div>
-
           </div>
 
-          {/* RIGHT SIDE FORM */}
-          <div className="bg-[#111] border border-[#2a2a2a] rounded-2xl p-8">
+          {/* FORM */}
+          <form
+            onSubmit={handleSubmit}
+            className="bg-[#111] border border-[#2a2a2a] rounded-xl p-8 grid gap-5"
+          >
+            <div className="grid md:grid-cols-2 gap-5">
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="input"
+              />
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="input"
+              />
 
-              <div className="grid md:grid-cols-2 gap-5">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="input"
-                  required
-                />
+              <input
+                type="text"
+                name="subject"
+                placeholder="Company"
+                value={formData.subject}
+                onChange={handleChange}
+                className="input"
+              />
 
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className="input"
-                  required
-                />
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-5">
-                <input
-                  type="text"
-                  placeholder="Company"
-                  value={formData.subject}
-                  onChange={(e) =>
-                    setFormData({ ...formData, subject: e.target.value })
-                  }
-                  className="input"
-                />
-
-                <PhoneInput
+             <PhoneInput
                   country={"in"}
                   value={formData.phone}
                   onChange={(phone) =>
@@ -154,73 +175,68 @@ function Contact() {
                   buttonClass="phone-button"
                   containerClass="w-full"
                 />
-              </div>
+            </div>
 
-              <textarea
-                rows={5}
-                placeholder="Estimated quantity & details..."
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                className="input"
-                required
-              />
+            <textarea
+              name="message"
+              placeholder="Estimated quantity & details..."
+              value={formData.message}
+              onChange={handleChange}
+              rows={5}
+              required
+              className="input"
+            />
 
-              {/* CAPTCHA */}
-              <div className="flex gap-4 items-center">
-                <div className="captcha-box">{captchaCode}</div>
-
-                <button
-                  type="button"
-                  onClick={() => setCaptchaCode(generateCaptcha())}
-                  className="refresh-btn"
-                >
-                  ↻
-                </button>
-
-                <input
-                  type="text"
-                  placeholder="Enter code"
-                  value={formData.captcha}
-                  onChange={(e) =>
-                    setFormData({ ...formData, captcha: e.target.value })
-                  }
-                  className="input flex-1"
-                  required
-                />
+            {/* CAPTCHA */}
+            <div className="flex items-center gap-4">
+              <div className="px-6 py-3 rounded-lg bg-black border border-[#2a2a2a] tracking-[0.4em] text-[#c9a34e] font-bold">
+                {captchaCode}
               </div>
 
               <button
-                type="submit"
-                disabled={loading}
-                className="submit-btn"
+                type="button"
+                onClick={() => setCaptchaCode(generateCaptcha())}
+                className="px-4 py-3 border border-[#2a2a2a] rounded-lg"
               >
-                {loading ? "Sending..." : "Send Inquiry →"}
+                ↻
               </button>
 
-              {responseMsg && (
-                <p className="text-center text-green-400 text-sm">
-                  {responseMsg}
-                </p>
-              )}
-            </form>
-          </div>
-        </div>
-      </div>
+              <input
+                type="text"
+                name="captcha"
+                placeholder="Enter code"
+                value={formData.captcha}
+                onChange={handleChange}
+                required
+                className="input flex-1"
+              />
+            </div>
 
-      {/* STYLES */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-4 bg-[#c9a34e] text-black py-3 rounded-lg font-semibold"
+            >
+              {loading ? "Sending..." : "Send Inquiry →"}
+            </button>
+
+            {responseMsg && (
+              <p className="text-sm text-green-400">{responseMsg}</p>
+            )}
+          </form>
+        </div>
+      </section>
+
+      {/* INPUT STYLES */}
       <style jsx>{`
         .input {
-          width: 100%;
           background: #0b0b0b;
           border: 1px solid #2a2a2a;
           padding: 12px 14px;
-          border-radius: 10px;
+          border-radius: 8px;
           color: white;
           outline: none;
         }
-
         .input:focus {
           border-color: #c9a34e;
           box-shadow: 0 0 0 1px #c9a34e;
