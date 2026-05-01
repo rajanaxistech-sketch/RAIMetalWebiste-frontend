@@ -150,3 +150,33 @@
 .react-tel-input .selected-flag:focus {
   background: transparent !important;
 }
+
+/* Dropdown container */
+.react-tel-input .country-list {
+  background-color: #0b0b0b !important;
+  border: 1px solid #2a2a2a !important;
+  color: white !important;
+}
+
+/* Each country item */
+.react-tel-input .country-list .country {
+  background-color: #0b0b0b !important;
+  color: white !important;
+}
+
+/* Hover state */
+.react-tel-input .country-list .country:hover {
+  background-color: #1a1a1a !important;
+}
+
+/* Selected country */
+.react-tel-input .country-list .country.highlight {
+  background-color: #1a1a1a !important;
+}
+
+/* Search input inside dropdown */
+.react-tel-input .search-box {
+  background-color: #0b0b0b !important;
+  color: white !important;
+  border: 1px solid #2a2a2a !important;
+}

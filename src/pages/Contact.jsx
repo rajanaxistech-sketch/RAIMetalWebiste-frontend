@@ -182,7 +182,7 @@ function Contact() {
               placeholder="Estimated quantity & details..."
               value={formData.message}
               onChange={handleChange}
-              rows={5}
+              rows={4}
               required
               className="input"
             />
