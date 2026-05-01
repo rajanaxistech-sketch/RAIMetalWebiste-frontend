@@ -38,13 +38,14 @@ function Contact() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://raimetalsapi.anaxistech.com/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://raimetalsapi.anaxistech.com/api/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (res.ok) {
         setResponseMsg("Message sent successfully!");
@@ -68,128 +69,144 @@ function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-white flex items-center justify-center px-4">
-      <div className="w-full max-w-4xl bg-[#111] border border-[#2a2a2a] rounded-2xl p-8 shadow-lg">
+    <div className="min-h-screen bg-[#0b0b0b] text-white px-4 py-10 pt-48">
+      <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold">
+        <div className="mb-10">
+          <p className="text-sm text-gray-400 tracking-widest">
+            GET IN TOUCH
+          </p>
+          <h1 className="text-4xl font-bold">
             Request a <span className="text-[#c9a34e]">Quote</span>
           </h1>
-          <p className="text-gray-400 mt-2 text-sm">
-            Fill the form and we’ll get back to you
-          </p>
         </div>
 
-        {/* FORM */}
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="grid lg:grid-cols-2 gap-8">
 
-          {/* ROW 1 */}
-          <div className="grid md:grid-cols-2 gap-5">
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              className="input"
-              required
-            />
+          {/* LEFT SIDE INFO */}
+          <div className="space-y-6">
 
-            <input
-              type="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              className="input"
-              required
-            />
-          </div>
-
-          {/* ROW 2 */}
-          <div className="grid md:grid-cols-2 gap-5">
-            <input
-              type="text"
-              placeholder="Company"
-              value={formData.subject}
-              onChange={(e) =>
-                setFormData({ ...formData, subject: e.target.value })
-              }
-              className="input"
-            />
-
-            {/* PHONE INPUT FIXED */}
-            <div className="phone-wrapper">
-              <PhoneInput
-                country={"in"}
-                value={formData.phone}
-                onChange={(phone) =>
-                  setFormData({ ...formData, phone })
-                }
-                containerClass="phone-container"
-              />
+            <div className="info-card">
+              <p className="label">📍 ADDRESS</p>
+              <p>5103 Ashcrest Ct, Tampa, Florida 33647</p>
             </div>
+
+            <div className="info-card">
+              <p className="label">📞 PHONE</p>
+              <p>+1 980-229-1914</p>
+            </div>
+
+            <div className="info-card">
+              <p className="label">✉️ EMAIL</p>
+              <p>amar@raimetals.net</p>
+            </div>
+
           </div>
 
-          {/* MESSAGE */}
-          <textarea
-            rows={5}
-            placeholder="Estimated quantity & details..."
-            value={formData.message}
-            onChange={(e) =>
-              setFormData({ ...formData, message: e.target.value })
-            }
-            className="input"
-            required
-          />
+          {/* RIGHT SIDE FORM */}
+          <div className="bg-[#111] border border-[#2a2a2a] rounded-2xl p-8">
 
-          {/* CAPTCHA */}
-          <div className="flex flex-col md:flex-row gap-4 items-center">
-            <div className="flex items-center gap-3 w-full md:w-auto">
-              <div className="captcha-box">
-                {captchaCode}
+            <form onSubmit={handleSubmit} className="space-y-5">
+
+              <div className="grid md:grid-cols-2 gap-5">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="input"
+                  required
+                />
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="input"
+                  required
+                />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-5">
+                <input
+                  type="text"
+                  placeholder="Company"
+                  value={formData.subject}
+                  onChange={(e) =>
+                    setFormData({ ...formData, subject: e.target.value })
+                  }
+                  className="input"
+                />
+
+                <PhoneInput
+                  country={"in"}
+                  value={formData.phone}
+                  onChange={(phone) =>
+                    setFormData({ ...formData, phone })
+                  }
+                  inputClass="phone-input"
+                  buttonClass="phone-button"
+                  containerClass="w-full"
+                />
+              </div>
+
+              <textarea
+                rows={5}
+                placeholder="Estimated quantity & details..."
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+                className="input"
+                required
+              />
+
+              {/* CAPTCHA */}
+              <div className="flex gap-4 items-center">
+                <div className="captcha-box">{captchaCode}</div>
+
+                <button
+                  type="button"
+                  onClick={() => setCaptchaCode(generateCaptcha())}
+                  className="refresh-btn"
+                >
+                  ↻
+                </button>
+
+                <input
+                  type="text"
+                  placeholder="Enter code"
+                  value={formData.captcha}
+                  onChange={(e) =>
+                    setFormData({ ...formData, captcha: e.target.value })
+                  }
+                  className="input flex-1"
+                  required
+                />
               </div>
 
               <button
-                type="button"
-                onClick={() => setCaptchaCode(generateCaptcha())}
-                className="refresh-btn"
+                type="submit"
+                disabled={loading}
+                className="submit-btn"
               >
-                ↻
+                {loading ? "Sending..." : "Send Inquiry →"}
               </button>
-            </div>
 
-            <input
-              type="text"
-              placeholder="Enter code"
-              value={formData.captcha}
-              onChange={(e) =>
-                setFormData({ ...formData, captcha: e.target.value })
-              }
-              className="input flex-1"
-              required
-            />
+              {responseMsg && (
+                <p className="text-center text-green-400 text-sm">
+                  {responseMsg}
+                </p>
+              )}
+            </form>
           </div>
-
-          {/* BUTTON */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="submit-btn"
-          >
-            {loading ? "Sending..." : "Send Inquiry →"}
-          </button>
-
-          {/* RESPONSE */}
-          {responseMsg && (
-            <p className="text-center text-sm text-green-400">
-              {responseMsg}
-            </p>
-          )}
-        </form>
+        </div>
       </div>
 
       {/* STYLES */}
@@ -202,7 +219,6 @@ function Contact() {
           border-radius: 10px;
           color: white;
           outline: none;
-          transition: 0.2s;
         }
 
         .input:focus {
@@ -217,11 +233,19 @@ function Contact() {
           padding: 14px;
           border-radius: 10px;
           font-weight: 600;
-          transition: 0.3s;
         }
 
-        .submit-btn:hover {
-          opacity: 0.9;
+        .info-card {
+          background: #111;
+          border: 1px solid #2a2a2a;
+          padding: 20px;
+          border-radius: 16px;
+        }
+
+        .label {
+          color: #c9a34e;
+          font-size: 12px;
+          margin-bottom: 6px;
         }
 
         .captcha-box {
@@ -229,7 +253,7 @@ function Contact() {
           background: black;
           border: 1px solid #2a2a2a;
           border-radius: 10px;
-          letter-spacing: 6px;
+          letter-spacing: 5px;
           color: #c9a34e;
           font-weight: bold;
         }
@@ -238,11 +262,6 @@ function Contact() {
           padding: 10px 14px;
           border: 1px solid #2a2a2a;
           border-radius: 10px;
-        }
-
-        /* PHONE INPUT FIX */
-        .phone-container {
-          width: 100%;
         }
 
         .phone-input {
@@ -258,7 +277,6 @@ function Contact() {
           background: #0b0b0b !important;
           border: 1px solid #2a2a2a !important;
           border-right: none !important;
-          border-radius: 10px 0 0 10px !important;
         }
       `}</style>
     </div>
