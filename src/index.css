@@ -80,3 +80,62 @@
     @apply font-rajdhani text-[11px] uppercase tracking-widest text-gray-500;
   }
 }
+
+/* ===== PHONE INPUT DARK THEME FIX ===== */
+
+/* Container */
+.phone-container {
+  width: 100%;
+}
+
+/* Input field */
+.phone-container .form-control {
+  @apply !w-full !bg-dark-500 !text-white !border !border-[#2a2a2a] !rounded-lg;
+  height: 48px !important;
+  padding-left: 60px !important;
+}
+
+/* Flag button */
+.phone-container .flag-dropdown {
+  @apply !bg-dark-500 !border !border-[#2a2a2a] !rounded-l-lg;
+}
+
+/* Dropdown list */
+.phone-container .country-list {
+  @apply !bg-dark-500 !text-white !border !border-[#2a2a2a] !rounded-lg;
+  margin-top: 6px !important;
+}
+
+/* Each country */
+.phone-container .country {
+  @apply !text-white;
+  padding: 10px !important;
+}
+
+/* Hover */
+.phone-container .country:hover {
+  background-color: #1a1a1a !important;
+}
+
+/* Selected */
+.phone-container .country.highlight {
+  background-color: #c9a34e !important;
+  color: black !important;
+}
+
+/* Search box */
+.phone-container .search {
+  @apply !bg-dark-500 !text-white !border !border-[#2a2a2a];
+}
+
+/* Scrollbar (premium look) */
+.phone-container .country-list::-webkit-scrollbar {
+  width: 6px;
+}
+.phone-container .country-list::-webkit-scrollbar-thumb {
+  background: #c9a34e;
+  border-radius: 10px;
+}
+.react-tel-input .flag-dropdown.open .selected-flag{
+  background: transparent !important;
+}

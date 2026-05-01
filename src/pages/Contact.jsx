@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Seo from "../components/Seo";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 function Contact() {
   const generateCaptcha = () => {
@@ -19,53 +20,34 @@ function Contact() {
     subject: "",
     phone: "",
     message: "",
-    captcha: "", 
+    captcha: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.captcha.toUpperCase() !== captchaCode) {
-      setResponseMsg("Invalid CAPTCHA. Please try again.");
+      setResponseMsg("Invalid CAPTCHA");
       setCaptchaCode(generateCaptcha());
       return;
     }
 
     setLoading(true);
-    setResponseMsg("");
 
     try {
-      const payload = {
-        ...formData,
-        captchaCode: formData.captcha, 
-        captcha: captchaCode,
-      };
-
-      console.log("Submitting:", payload);
-
       const res = await fetch("https://raimetalsapi.anaxistech.com/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(formData),
       });
-
-      const data = await res.json();
 
       if (res.ok) {
         setResponseMsg("Message sent successfully!");
-
         setFormData({
           name: "",
           email: "",
@@ -76,166 +58,207 @@ function Contact() {
         });
         setCaptchaCode(generateCaptcha());
       } else {
-        setResponseMsg(data.message || "Something went wrong.");
+        setResponseMsg("Something went wrong.");
       }
-    } catch (error) {
-      setResponseMsg("Server error. Please try again.");
+    } catch {
+      setResponseMsg("Server error");
     }
 
     setLoading(false);
   };
 
   return (
-    <div className="pt-[140px] bg-[#0b0b0b] text-white min-h-screen">
-      <Seo
-        title="Contact Rai Metals | Request Scrap Metal Quote"
-        description="Contact Rai Metals for scrap metal sourcing, pricing, and global trading inquiries. Request a quote for ferrous and non-ferrous materials."
-        keywords="contact Rai Metals, scrap metal quote, metal supplier inquiry, ferrous scrap pricing, non-ferrous scrap"
-        robots="index, follow"
-        canonicalPath="/contact"
-        image="/uploads/Logo1.jpeg"
-      />
+    <div className="min-h-screen bg-[#0b0b0b] text-white flex items-center justify-center px-4">
+      <div className="w-full max-w-4xl bg-[#111] border border-[#2a2a2a] rounded-2xl p-8 shadow-lg">
 
-      <section className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* HEADER */}
-        <div className="mb-14 border-t border-[#2a2a2a] pt-10">
-          <p className="text-sm tracking-[0.2em] text-gray-400 uppercase">
-            Get in touch
-          </p>
-          <h1 className="text-4xl md:text-6xl font-extrabold mt-2">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold">
             Request a <span className="text-[#c9a34e]">Quote</span>
           </h1>
+          <p className="text-gray-400 mt-2 text-sm">
+            Fill the form and we’ll get back to you
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* LEFT PANEL */}
-          <div className="space-y-8">
-            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
-              <p className="text-[#c9a34e] text-sm mb-2">📍 ADDRESS</p>
-              <p className="text-gray-300">
-                5103 Ashcrest Ct, Tampa, Florida 33647
-              </p>
-            </div>
+        {/* FORM */}
+        <form onSubmit={handleSubmit} className="space-y-5">
 
-            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
-              <p className="text-[#c9a34e] text-sm mb-2">📞 PHONE</p>
-              <p className="text-gray-300">+1 980-229-1914</p>
-            </div>
+          {/* ROW 1 */}
+          <div className="grid md:grid-cols-2 gap-5">
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              className="input"
+              required
+            />
 
-            <div className="border border-[#2a2a2a] p-6 rounded-xl bg-[#111]">
-              <p className="text-[#c9a34e] text-sm mb-2">✉️ EMAIL</p>
-              <p className="text-gray-300">amar@raimetals.net</p>
-            </div>
+            <input
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className="input"
+              required
+            />
           </div>
 
-          {/* FORM */}
-          <form
-            onSubmit={handleSubmit}
-            className="bg-[#111] border border-[#2a2a2a] rounded-xl p-8 grid gap-5"
-          >
-            <div className="grid md:grid-cols-2 gap-5">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="input"
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="input"
-              />
-
-              <input
-                type="text"
-                name="subject"
-                placeholder="Company"
-                value={formData.subject}
-                onChange={handleChange}
-                className="input"
-              />
-
-              <input
-                type="text"
-                name="phone"
-                placeholder="Phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="input"
-              />
-            </div>
-
-            <textarea
-              name="message"
-              placeholder="Estimated quantity & details..."
-              value={formData.message}
-              onChange={handleChange}
-              rows={5}
-              required
+          {/* ROW 2 */}
+          <div className="grid md:grid-cols-2 gap-5">
+            <input
+              type="text"
+              placeholder="Company"
+              value={formData.subject}
+              onChange={(e) =>
+                setFormData({ ...formData, subject: e.target.value })
+              }
               className="input"
             />
 
-            {/* CAPTCHA */}
-            <div className="flex items-center gap-4">
-              <div className="px-6 py-3 rounded-lg bg-black border border-[#2a2a2a] tracking-[0.4em] text-[#c9a34e] font-bold">
+            {/* PHONE INPUT FIXED */}
+            <div className="phone-wrapper">
+              <PhoneInput
+                country={"in"}
+                value={formData.phone}
+                onChange={(phone) =>
+                  setFormData({ ...formData, phone })
+                }
+                containerClass="phone-container"
+              />
+            </div>
+          </div>
+
+          {/* MESSAGE */}
+          <textarea
+            rows={5}
+            placeholder="Estimated quantity & details..."
+            value={formData.message}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
+            className="input"
+            required
+          />
+
+          {/* CAPTCHA */}
+          <div className="flex flex-col md:flex-row gap-4 items-center">
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <div className="captcha-box">
                 {captchaCode}
               </div>
 
               <button
                 type="button"
                 onClick={() => setCaptchaCode(generateCaptcha())}
-                className="px-4 py-3 border border-[#2a2a2a] rounded-lg"
+                className="refresh-btn"
               >
                 ↻
               </button>
-
-              <input
-                type="text"
-                name="captcha"
-                placeholder="Enter code"
-                value={formData.captcha}
-                onChange={handleChange}
-                required
-                className="input flex-1"
-              />
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-4 bg-[#c9a34e] text-black py-3 rounded-lg font-semibold"
-            >
-              {loading ? "Sending..." : "Send Inquiry →"}
-            </button>
+            <input
+              type="text"
+              placeholder="Enter code"
+              value={formData.captcha}
+              onChange={(e) =>
+                setFormData({ ...formData, captcha: e.target.value })
+              }
+              className="input flex-1"
+              required
+            />
+          </div>
 
-            {responseMsg && (
-              <p className="text-sm text-green-400">{responseMsg}</p>
-            )}
-          </form>
-        </div>
-      </section>
+          {/* BUTTON */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="submit-btn"
+          >
+            {loading ? "Sending..." : "Send Inquiry →"}
+          </button>
 
-      {/* INPUT STYLES */}
+          {/* RESPONSE */}
+          {responseMsg && (
+            <p className="text-center text-sm text-green-400">
+              {responseMsg}
+            </p>
+          )}
+        </form>
+      </div>
+
+      {/* STYLES */}
       <style jsx>{`
         .input {
+          width: 100%;
           background: #0b0b0b;
           border: 1px solid #2a2a2a;
           padding: 12px 14px;
-          border-radius: 8px;
+          border-radius: 10px;
           color: white;
           outline: none;
+          transition: 0.2s;
         }
+
         .input:focus {
           border-color: #c9a34e;
           box-shadow: 0 0 0 1px #c9a34e;
+        }
+
+        .submit-btn {
+          width: 100%;
+          background: #c9a34e;
+          color: black;
+          padding: 14px;
+          border-radius: 10px;
+          font-weight: 600;
+          transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+          opacity: 0.9;
+        }
+
+        .captcha-box {
+          padding: 10px 16px;
+          background: black;
+          border: 1px solid #2a2a2a;
+          border-radius: 10px;
+          letter-spacing: 6px;
+          color: #c9a34e;
+          font-weight: bold;
+        }
+
+        .refresh-btn {
+          padding: 10px 14px;
+          border: 1px solid #2a2a2a;
+          border-radius: 10px;
+        }
+
+        /* PHONE INPUT FIX */
+        .phone-container {
+          width: 100%;
+        }
+
+        .phone-input {
+          width: 100% !important;
+          background: #0b0b0b !important;
+          border: 1px solid #2a2a2a !important;
+          color: white !important;
+          border-radius: 10px !important;
+          height: 48px !important;
+        }
+
+        .phone-button {
+          background: #0b0b0b !important;
+          border: 1px solid #2a2a2a !important;
+          border-right: none !important;
+          border-radius: 10px 0 0 10px !important;
         }
       `}</style>
     </div>
